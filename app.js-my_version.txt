@@ -1,0 +1,35 @@
+import express from "express";
+import ejs from "ejs";
+
+const app = express();
+app.use(express.urlencoded({extended: true}));
+app.set('view engine', 'ejs');
+
+let list = "";
+app.get("/", function(req,res){
+    
+    let str = "";
+    let days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    let today = new Date();
+    console.log(today.getDay());
+    str = days[today.getDay()];
+    let listItems = "";
+    res.render('index', {kindOfDay: str, listItems: list});
+})
+
+app.post("/", function(req, res){
+    let str = "";
+    let days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    let today = new Date();
+    console.log(today.getDay());
+    str = days[today.getDay()];
+    
+    list = list + "<li>"+req.body.listInput+"</li>";
+    console.log(list);
+    let kindOfDay = "";
+    res.render('index', {kindOfDay: str, listItems: list});
+})
+
+app.listen(3000, function(){
+    console.log("Server is running on port 3000");
+})
