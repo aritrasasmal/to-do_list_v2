@@ -9,7 +9,7 @@ app.set('view engine', 'ejs');
 
 main().catch(err => console.log(err));
 async function main(){
-    await mongoose.connect("mongodb+srv://MONGODB_URL/todolistDB");
+    await mongoose.connect("mongodb+srv://"+process.env.MONGODB_ID-PW_URL+"/todolistDB");
 }
 
 const itemSchema = new mongoose.Schema({
